@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flightapp
+  labels:
+    app: flightapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flightapp
+  template:
+    metadata:
+      name: flightapp
+      labels:
+        app: flightapp
+    spec:
+      containers:
+      - name: flightapp
+        image: prashantojha01/flight-image2
+        ports:
+          - containerPort: 8080
+            name: flightapp
+        env:
+          - name: DB_HOSTNAME
+            value:  192.168.145.234
+          - name: DB_PORT
+            value: "3306"
+          - name: DB_NAME
+            value: "journey"
+          - name: DB_USERNAME
+            value: "root"
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: flight-sql-pwd
+                key: db-password

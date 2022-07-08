@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysqlf
+  labels:
+    app: mysqlf
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysqlf
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      name: flightsql-template
+      labels:
+        app: mysqlf
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:5.6
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: flight-sql-pwd
+                  key: db-password
+          ports:
+            - containerPort: 3306
+              name: mysql
+          volumeMounts:
+            - name: flight-pv
+              mountPath: /var/lib/mysql
+            - name: flight-db-query
+              mountPath: /docker-entrypoint-initdb.d
+      volumes:
+        - name: flight-pv
+          persistentVolumeClaim:
+              claimName: flight-pv-claim
+        - name: flight-db-query
+          configMap:
+            name: flight-db-query
