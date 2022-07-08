@@ -41,7 +41,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
+                <!-- https://mvnrepository.com/artifact/com.dkanejs.maven.plugins/docker-compose-maven-plugin -->
+                <dependency>
+                         <groupId>com.dkanejs.maven.plugins</groupId>
+                         <artifactId>docker-compose-maven-plugin</artifactId>
+                         <version>4.0.0</version>
+                </dependency>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>

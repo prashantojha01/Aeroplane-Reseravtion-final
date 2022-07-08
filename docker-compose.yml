@@ -1,0 +1,22 @@
+version: "3"
+services:
+  mysqldb:
+    image: mysql:5.7
+    networks:
+      - journey-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=mypassword01
+      - MYSQL_DATABASE=journey
+
+  employee-jdbc:
+    image: prashantojha01/aeroplane-reservation:0.0.1-SNAPSHOT
+    ports:
+      - "8082:8080"
+    networks:
+      - journey-mysql
+    depends_on:
+      - mysqldb
+
+  
+networks:
+  journey-mysql:
