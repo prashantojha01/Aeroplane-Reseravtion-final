@@ -3,10 +3,10 @@ kind: Service
 metadata:
   name: flightapp-service
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: flightapp
   ports:
-  - nodePort: 32000
-    port: 8080
-    targetPort: 8080
+  - nodePort: 32001
+    port: 32001
+    targetPort: 8082
