@@ -40,7 +40,7 @@ pipeline {
         }
         stage('sonar scanner') {
             steps {
-                    sh 'mvn clean verify sonar:sonar  -Dsonar.projectKey=chatappojha  -Dsonar.host.url=http://20.127.116.158:9000  -Dsonar.login=sqp_52b730d5bd175a42658c314bf225bb8d6fef6d84'
+                    sh 'mvn clean verify sonar:sonar  -Dsonar.projectKey=chatappojha  -Dsonar.host.url=http://20.127.109.125:9000  -Dsonar.login=sqp_52b730d5bd175a42658c314bf225bb8d6fef6d84'
             }
         }
         stage ('Nexus upload')  {
